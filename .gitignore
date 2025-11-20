@@ -1,0 +1,19 @@
+mobile_app/[Ll]ibrary/
+mobile_app/[Tt]emp/
+mobile_app/[Oo]bj/
+mobile_app/[Bb]uild/
+mobile_app/[Bb]uilds/
+mobile_app/[Ll]ogs/
+mobile_app/[Mm]emoryCaptures/
+
+# IDE files
+mobile_app/.vs/
+mobile_app/.vscode/
+mobile_app/.idea/
+mobile_app/*.csproj
+mobile_app/*.sln
+mobile_app/*.user
+
+# OS files
+.DS_Store
+Thumbs.db
