@@ -437,9 +437,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   apiBaseUrl: https://localhost:7105/api/PersonnageQuests/Active/
   email: test@gmail.com
+  apiNextGenUrl: https://localhost:7105/api/PersonnageQuests/NextGenerationInfo
   contentParent: {fileID: 214836812}
   questCardPrefab: {fileID: 6717782701126118742, guid: 6e4392a04d5c0704f800286aba5e2d6f, type: 3}
-  questCountBadge: {fileID: 0}
+  questCountBadge: {fileID: 2045609190}
+  timerText: {fileID: 675865485}
+  refreshIntervalSeconds: 600
 --- !u!1 &136635347
 GameObject:
   m_ObjectHideFlags: 0
@@ -2953,6 +2956,7 @@ GameObject:
   - component: {fileID: 1844744832}
   - component: {fileID: 1844744834}
   - component: {fileID: 1844744833}
+  - component: {fileID: 1844744835}
   m_Layer: 5
   m_Name: NextQuestPannel
   m_TagString: Untagged
@@ -3020,6 +3024,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1844744831}
   m_CullTransparentMesh: 1
+--- !u!114 &1844744835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1844744831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f9e300da64327d48b663100fd80838f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timerLabel: {fileID: 675865485}
+  questList: {fileID: 94861833}
+  intervalSeconds: 60
 --- !u!1 &2042414509
 GameObject:
   m_ObjectHideFlags: 0
@@ -3413,13 +3432,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Content: {fileID: 214836812}
-  m_Horizontal: 1
+  m_Horizontal: 0
   m_Vertical: 1
-  m_MovementType: 1
+  m_MovementType: 0
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 1
+  m_ScrollSensitivity: 50
   m_Viewport: {fileID: 1160065831}
   m_HorizontalScrollbar: {fileID: 2086630173}
   m_VerticalScrollbar: {fileID: 87993330}

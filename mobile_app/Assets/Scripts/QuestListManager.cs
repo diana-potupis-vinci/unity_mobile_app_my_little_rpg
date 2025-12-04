@@ -23,21 +23,59 @@ public class QuestListManager : MonoBehaviour
     [Header("API Settings")]
     public string apiBaseUrl = "https://localhost:7105/api/PersonnageQuests/Active/";
     public string email = "test@gmail.com";
+    public string apiNextGenUrl = "https://localhost:7105/api/PersonnageQuests/NextGenerationInfo";
     
     [Header("UI")]
     public Transform contentParent;
     public GameObject questCardPrefab;
     public TextMeshProUGUI questCountBadge;
-
+    public TextMeshProUGUI timerText;
+    public float refreshIntervalSeconds = 600f;
+    private float timeRemaining;
     private void Start()
     {
         System.Net.ServicePointManager.ServerCertificateValidationCallback = (a, b, c, d) => true;
-        StartCoroutine(LoadQuestsFromAPI());
+        StartCoroutine(InitAndLoad());
     }
+    IEnumerator InitAndLoad()
+    {
+        yield return LoadQuestsFromAPI();
+
+        yield return SyncTimerWithServer();
+    }
+
+    private void Update()
+    {
+        if (timeRemaining > 0f)
+        {
+            timeRemaining -= Time.deltaTime;
+            if (timeRemaining < 0f) timeRemaining = 0f;
+            UpdateTimerLabel();
+
+            if (timeRemaining <= 0f)
+            {
+                StartCoroutine(LoadQuestsFromAPI());
+                StartCoroutine(SyncTimerWithServer());
+            }
+        }
+    }
+
+    private void UpdateTimerLabel()
+    {
+        if (timerText == null) return;
+
+        int totalSeconds = Mathf.CeilToInt(timeRemaining);
+        int minutes = totalSeconds / 60;
+        int seconds = totalSeconds % 60;
+
+        timerText.text = $"{minutes:00}m {seconds:00}s";
+    }
+
 
     public void Refresh()
     {
         StartCoroutine(LoadQuestsFromAPI());
+        StartCoroutine(SyncTimerWithServer());
     }
 
     IEnumerator LoadQuestsFromAPI()
@@ -126,6 +164,40 @@ public class QuestListManager : MonoBehaviour
             }
         }
     }
+
+    IEnumerator SyncTimerWithServer()
+{
+    if (string.IsNullOrEmpty(apiNextGenUrl))
+        yield break;
+
+    using (UnityWebRequest req = UnityWebRequest.Get(apiNextGenUrl))
+    {
+        req.certificateHandler = new BypassCertificate();
+        yield return req.SendWebRequest();
+
+        if (req.result != UnityWebRequest.Result.Success)
+        {
+            Debug.LogError("Erreur NextGenerationInfo: " + req.error);
+            yield break;
+        }
+
+        var json = req.downloadHandler.text;
+        var dict = JsonConvert.DeserializeObject<Dictionary<string, object>>(json);
+
+        if (dict != null && dict.TryGetValue("secondsUntilNext", out var secondsObj)
+                        && dict.TryGetValue("intervalSeconds", out var intervalObj))
+        {
+            int secondsUntil = System.Convert.ToInt32(secondsObj);
+            int interval = System.Convert.ToInt32(intervalObj);
+
+            refreshIntervalSeconds = interval;
+            timeRemaining = secondsUntil;
+            if (timeRemaining < 0f) timeRemaining = 0f;
+            UpdateTimerLabel();
+        }
+    }
+}
+
 }
 
 // Class to bypass SSL certificates (for development only!)
