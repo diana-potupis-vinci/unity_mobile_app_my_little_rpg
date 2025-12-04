@@ -166,7 +166,7 @@ GameObject:
   - component: {fileID: 788030069312760258}
   - component: {fileID: 31287505150472032}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: rewardText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -189,7 +189,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.00002648, y: 6}
+  m_AnchoredPosition: {x: 0, y: 12.221008}
   m_SizeDelta: {x: 116.29, y: 33.748}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &788030069312760258
@@ -247,14 +247,14 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
+  m_fontSize: 27.05
   m_fontSizeBase: 24
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 30
   m_fontStyle: 1
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -324,7 +324,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -24, y: 54}
+  m_AnchoredPosition: {x: 0, y: 51}
   m_SizeDelta: {x: 732.637, y: 71}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6717782700672347742
@@ -382,14 +382,14 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
+  m_fontSize: 40
   m_fontSizeBase: 36
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 14
+  m_fontSizeMax: 40
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -459,8 +459,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 932.284, y: 15.744}
+  m_AnchoredPosition: {x: -27.6461, y: -3.3175}
+  m_SizeDelta: {x: 876.9918, y: 22.3791}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6717782700695418658
 CanvasRenderer:
@@ -512,7 +512,7 @@ GameObject:
   - component: {fileID: 6717782700767204296}
   - component: {fileID: 6717782700767204297}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: progressLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -535,8 +535,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 27.573002}
-  m_SizeDelta: {x: 287.486, y: 55.146}
+  m_AnchoredPosition: {x: 0, y: 36}
+  m_SizeDelta: {x: 346.0741, y: 43.0243}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6717782700767204296
 CanvasRenderer:
@@ -593,14 +593,14 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
+  m_fontSize: 38.5
   m_fontSizeBase: 36
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 20
+  m_fontSizeMax: 50
   m_fontStyle: 1
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -646,6 +646,7 @@ GameObject:
   - component: {fileID: 6717782701126118741}
   - component: {fileID: 6717782701126118739}
   - component: {fileID: 6717782701126118740}
+  - component: {fileID: -7311667286404330272}
   m_Layer: 5
   m_Name: QuestCardPrefab
   m_TagString: Untagged
@@ -715,6 +716,23 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &-7311667286404330272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6717782701126118742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c8b95538e2966744b6740af2893d383, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  titleText: {fileID: 6717782701626918947}
+  descriptionText: {fileID: 6717782700672347743}
+  progressLabel: {fileID: 6717782700767204297}
+  progressFill: {fileID: 6717782700695418659}
+  rewardText: {fileID: 31287505150472032}
 --- !u!1 &6717782701597300811
 GameObject:
   m_ObjectHideFlags: 0
@@ -828,7 +846,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -11.358}
-  m_SizeDelta: {x: 302.31897, y: 58.897}
+  m_SizeDelta: {x: 654.9194, y: 58.897}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6717782701626918946
 CanvasRenderer:
@@ -885,14 +903,14 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40
+  m_fontSize: 52.7
   m_fontSizeBase: 40
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 40
   m_fontSizeMax: 72
   m_fontStyle: 1
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
