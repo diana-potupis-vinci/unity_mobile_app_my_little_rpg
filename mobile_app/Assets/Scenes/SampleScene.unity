@@ -160,8 +160,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 434.58, y: -48.294}
-  m_SizeDelta: {x: 100, y: 62.588}
+  m_AnchoredPosition: {x: 411.528, y: -58.843}
+  m_SizeDelta: {x: 146.104, y: 83.686}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &74189294
 MonoBehaviour:
@@ -2956,7 +2956,6 @@ GameObject:
   - component: {fileID: 1844744832}
   - component: {fileID: 1844744834}
   - component: {fileID: 1844744833}
-  - component: {fileID: 1844744835}
   m_Layer: 5
   m_Name: NextQuestPannel
   m_TagString: Untagged
@@ -3024,21 +3023,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1844744831}
   m_CullTransparentMesh: 1
---- !u!114 &1844744835
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1844744831}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f9e300da64327d48b663100fd80838f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timerLabel: {fileID: 675865485}
-  questList: {fileID: 94861833}
-  intervalSeconds: 60
 --- !u!1 &2042414509
 GameObject:
   m_ObjectHideFlags: 0
@@ -3150,8 +3134,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.00001362, y: -0.000012755}
-  m_SizeDelta: {x: 69.497, y: 38.606}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 141.4, y: 79.907}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2045609190
 MonoBehaviour:
@@ -3207,8 +3191,8 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -3236,7 +3220,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 10.358269, y: 0, z: 0, w: 0}
+  m_margin: {x: -1.3629875, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

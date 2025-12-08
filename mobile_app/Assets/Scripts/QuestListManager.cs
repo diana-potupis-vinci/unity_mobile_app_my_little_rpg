@@ -138,7 +138,7 @@ public class QuestListManager : MonoBehaviour
 
             // Mise à jour badge
             if (questCountBadge != null)
-                questCountBadge.text = $"{quests.Count}/3";
+                questCountBadge.text = $"{quests.Count}/{quests.Count}";
 
             // Créer les cartes UI
             foreach (var quest in quests)
