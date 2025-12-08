@@ -32,6 +32,12 @@ public class QuestListManager : MonoBehaviour
     public TextMeshProUGUI timerText;
     public float refreshIntervalSeconds = 600f;
     private float timeRemaining;
+
+    [Header("Notifications")]
+    public NotificationManager notificationManager;
+
+    private HashSet<int> _knownQuestIds = new HashSet<int>();
+
     private void Start()
     {
         System.Net.ServicePointManager.ServerCertificateValidationCallback = (a, b, c, d) => true;
@@ -128,6 +134,36 @@ public class QuestListManager : MonoBehaviour
             }
 
             Debug.Log($"🟢 {quests.Count} quêtes chargées");
+
+            List<QuestProgressDto> newQuests = new List<QuestProgressDto>();
+
+            foreach (var q in quests)
+            {
+                if (!_knownQuestIds.Contains(q.questId))
+                {
+                    newQuests.Add(q);
+                    _knownQuestIds.Add(q.questId);
+                }
+            }
+
+            if (newQuests.Count > 0 && notificationManager != null)
+            {
+                if (newQuests.Count == 1)
+                {
+                    var q = newQuests[0];
+                    notificationManager.SendQuestNotification(
+                        "Nouvelle quête disponible",
+                        q.title ?? "Une nouvelle quête vient d’être ajoutée."
+                    );
+                }
+                else
+                {
+                    notificationManager.SendQuestNotification(
+                        "Nouvelles quêtes disponibles",
+                        $"{newQuests.Count} nouvelles quêtes ont été ajoutées."
+                    );
+                }
+            }
 
             // Nettoyer anciennes cartes
             if (contentParent != null)
