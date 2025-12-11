@@ -63,7 +63,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.28034887, g: 0.2904573, b: 0.9433962, a: 0.392}
+  m_Color: {r: 0.6799573, g: 0.68127656, b: 0.754717, a: 0.392}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -95,6 +95,9 @@ MonoBehaviour:
   iconImage: {fileID: 540741592841650491}
   nameText: {fileID: 3714342108912475060}
   statusText: {fileID: 8372613000128479736}
+  background: {fileID: 2158020227122040674}
+  huntedColor: {r: 0.7, g: 1, b: 0.7, a: 1}
+  notHuntedColor: {r: 0.9, g: 0.9, b: 0.9, a: 1}
 --- !u!1 &4046187439457769013
 GameObject:
   m_ObjectHideFlags: 0
