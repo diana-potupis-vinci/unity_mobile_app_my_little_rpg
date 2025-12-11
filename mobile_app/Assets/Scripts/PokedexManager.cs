@@ -16,6 +16,19 @@ public class PokedexManager : MonoBehaviour
     public GameObject monsterCardPrefab;
     public TextMeshProUGUI pageInfoText;
 
+    [Header("Icons")]
+    public Sprite defaultIcon;
+
+    public enum HuntFilter { All, Hunted, NotHunted }
+
+    [Header("Filters")]
+    public HuntFilter huntFilter = HuntFilter.All;
+    public string typeFilter = null;
+
+    [Header("Search")]
+    public TMP_InputField searchInput;
+    public string nameFilter = null;
+
     private int currentPage = 0;
     private int totalCount = 0;
 
@@ -38,10 +51,51 @@ public class PokedexManager : MonoBehaviour
             StartCoroutine(LoadPage(currentPage - 1));
     }
 
+    IEnumerator LoadIconAndSetupCard(MonsterPokedexDtoUnity m, MonsterCardUI ui)
+    {
+        if (string.IsNullOrEmpty(m.spriteUrl))
+        {
+            ui.Setup(m.name, m.isHunted, defaultIcon);
+            yield break;
+        }
+
+        using (UnityWebRequest req = UnityWebRequestTexture.GetTexture(m.spriteUrl))
+        {
+            yield return req.SendWebRequest();
+
+            if (req.result != UnityWebRequest.Result.Success)
+            {
+                Debug.LogWarning("Image load error for " + m.name + ": " + req.error);
+                ui.Setup(m.name, m.isHunted, defaultIcon);
+                yield break;
+            }
+
+            var tex = DownloadHandlerTexture.GetContent(req);
+            var sprite = Sprite.Create(
+                tex,
+                new Rect(0, 0, tex.width, tex.height),
+                new Vector2(0.5f, 0.5f)
+            );
+
+            ui.Setup(m.name, m.isHunted, sprite);
+        }
+    }
+
     IEnumerator LoadPage(int pageIndex)
     {
         int offset = pageIndex * pageSize;
         string url = $"{apiBaseUrl}?personnageId={personnageId}&offset={offset}&limit={pageSize}";
+
+        if (huntFilter == HuntFilter.Hunted)
+            url += "&hunted=true";
+        else if (huntFilter == HuntFilter.NotHunted)
+            url += "&hunted=false";
+
+        if (!string.IsNullOrEmpty(typeFilter))
+            url += $"&type={typeFilter}";
+
+        if (!string.IsNullOrEmpty(nameFilter))
+            url += $"&name={UnityWebRequest.EscapeURL(nameFilter)}";
 
         using (UnityWebRequest req = UnityWebRequest.Get(url))
         {
@@ -82,7 +136,7 @@ public class PokedexManager : MonoBehaviour
                 GameObject card = Instantiate(monsterCardPrefab, contentParent);
                 var ui = card.GetComponent<MonsterCardUI>();
                 if (ui != null)
-                    ui.Setup(m.name, m.isHunted);
+                    StartCoroutine(LoadIconAndSetupCard(m, ui));
             }
 
             if (pageInfoText != null)
@@ -92,4 +146,56 @@ public class PokedexManager : MonoBehaviour
             }
         }
     }
+
+    public void SetTypeAll()
+    {
+        typeFilter = null;
+        StartCoroutine(LoadPage(0));
+    }
+
+    public void SetTypeHunted()
+    {
+        typeFilter = null;
+        huntFilter = HuntFilter.Hunted;
+        StartCoroutine(LoadPage(0));
+    }
+
+    public void SetTypeFire()
+    {
+        typeFilter = "Fire";
+        StartCoroutine(LoadPage(0));
+    }
+    public void SetTypeElectric()
+    {
+        typeFilter = "Electric";
+        StartCoroutine(LoadPage(0));
+    }
+
+    public void SetTypeFairy()
+    {
+        typeFilter = "Fairy";
+        StartCoroutine(LoadPage(0));
+    }
+
+    public void SetTypeIce()
+    {
+        typeFilter = "Ice";
+        StartCoroutine(LoadPage(0));
+    }
+
+    public void SetTypeFighting()
+    {
+        typeFilter = "Fighting";
+        StartCoroutine(LoadPage(0));
+    }
+    public void OnSearchClicked()
+    {
+        if (searchInput != null)
+            nameFilter = searchInput.text;
+        else
+            nameFilter = null;
+
+        StartCoroutine(LoadPage(0));
+    }
+
 }

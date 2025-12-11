@@ -9,12 +9,14 @@ public class MonsterCardUI : MonoBehaviour
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI statusText;
 
-    public void Setup(string name, bool isHunted /*, string type, Sprite icon */)
+    public void Setup(string name, bool isHunted, Sprite icon/*, string type, Sprite icon */)
     {
         if (nameText != null)
             nameText.text = name;
 
         if (statusText != null)
             statusText.text = isHunted ? "Hunted" : "Not hunted";
+        if (iconImage != null && icon != null)
+            iconImage.sprite = icon;
     }
 }
