@@ -8,7 +8,7 @@ public class PokedexManager : MonoBehaviour
 {
     [Header("API")]
     public string apiBaseUrl = "https://localhost:7105/api/Monsters/Pokedex";
-    public int personnageId = 7;
+    public int personnageId;
     public int pageSize = 9;
 
     [Header("UI")]
@@ -35,6 +35,17 @@ public class PokedexManager : MonoBehaviour
     void Start()
     {
         Debug.Log("PokedexManager Start");
+        //StartCoroutine(LoadPage(0));
+    }
+    public void InitFromSession()
+    {
+        if (GameSession.PersonnageId == 0)
+        {
+            Debug.LogWarning("GameSession.PersonnageId is empty");
+            return;
+        }
+
+        personnageId = GameSession.PersonnageId;
         StartCoroutine(LoadPage(0));
     }
 

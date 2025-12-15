@@ -22,7 +22,7 @@ public class QuestListManager : MonoBehaviour
 {
     [Header("API Settings")]
     public string apiBaseUrl = "https://localhost:7105/api/PersonnageQuests/Active/";
-    public string email = "test@gmail.com";
+    public string email;
     public string apiNextGenUrl = "https://localhost:7105/api/PersonnageQuests/NextGenerationInfo";
     
     [Header("UI")]
@@ -41,13 +41,7 @@ public class QuestListManager : MonoBehaviour
     private void Start()
     {
         System.Net.ServicePointManager.ServerCertificateValidationCallback = (a, b, c, d) => true;
-        StartCoroutine(InitAndLoad());
-    }
-    IEnumerator InitAndLoad()
-    {
-        yield return LoadQuestsFromAPI();
-
-        yield return SyncTimerWithServer();
+        //StartCoroutine(InitAndLoad());
     }
 
     private void Update()
@@ -80,12 +74,20 @@ public class QuestListManager : MonoBehaviour
 
     public void Refresh()
     {
+        Debug.Log("QuestListManager.Refresh called, email = " + email);
+        if (string.IsNullOrEmpty(email))
+        {
+            Debug.LogError("QuestListManager.Refresh: email is empty, wait for login");
+            return;
+        }
+
         StartCoroutine(LoadQuestsFromAPI());
         StartCoroutine(SyncTimerWithServer());
     }
 
     IEnumerator LoadQuestsFromAPI()
     {
+        Debug.Log("LoadQuestsFromAPI start, email = " + email);
         if (string.IsNullOrEmpty(apiBaseUrl) || string.IsNullOrEmpty(email))
         {
             Debug.LogError("❌ API base URL or email not set");
