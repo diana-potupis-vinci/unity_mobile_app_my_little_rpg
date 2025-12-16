@@ -7,6 +7,7 @@ public class MonsterPokedexDtoUnity
     public string type2;
     public string spriteUrl;
     public bool isHunted;
+    public bool isFavorite;
 }
 
 [System.Serializable]

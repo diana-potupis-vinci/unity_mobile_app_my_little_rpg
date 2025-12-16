@@ -64,33 +64,29 @@ public class PokedexManager : MonoBehaviour
 
     IEnumerator LoadIconAndSetupCard(MonsterPokedexDtoUnity m, MonsterCardUI ui)
     {
-        if (string.IsNullOrEmpty(m.spriteUrl))
-        {
-            ui.Setup(m.name, m.isHunted, defaultIcon);
-            yield break;
-        }
+        Sprite iconToUse = defaultIcon;
 
-        using (UnityWebRequest req = UnityWebRequestTexture.GetTexture(m.spriteUrl))
+        if (!string.IsNullOrEmpty(m.spriteUrl))
         {
-            yield return req.SendWebRequest();
-
-            if (req.result != UnityWebRequest.Result.Success)
+            using (UnityWebRequest req = UnityWebRequestTexture.GetTexture(m.spriteUrl))
             {
-                Debug.LogWarning("Image load error for " + m.name + ": " + req.error);
-                ui.Setup(m.name, m.isHunted, defaultIcon);
-                yield break;
+                yield return req.SendWebRequest();
+
+                if (req.result == UnityWebRequest.Result.Success)
+                {
+                    var tex = DownloadHandlerTexture.GetContent(req);
+                    iconToUse = Sprite.Create(
+                        tex,
+                        new Rect(0, 0, tex.width, tex.height),
+                        new Vector2(0.5f, 0.5f)
+                    );
+                }
             }
-
-            var tex = DownloadHandlerTexture.GetContent(req);
-            var sprite = Sprite.Create(
-                tex,
-                new Rect(0, 0, tex.width, tex.height),
-                new Vector2(0.5f, 0.5f)
-            );
-
-            ui.Setup(m.name, m.isHunted, sprite);
         }
+
+        ui.Init(m.monsterId, m.name, m.isHunted, m.isFavorite, iconToUse, this);
     }
+
 
     IEnumerator LoadPage(int pageIndex)
     {
