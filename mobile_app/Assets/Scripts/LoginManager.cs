@@ -32,6 +32,7 @@ public class LoginManager : MonoBehaviour
 
     public QuestListManager questListManager;
     public PokedexManager pokedexManager;
+    public CharacterScreenManager characterScreenManager;
 
     public void OnLoginClicked()
     {
